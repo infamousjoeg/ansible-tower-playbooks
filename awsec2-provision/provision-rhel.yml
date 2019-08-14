@@ -1,7 +1,7 @@
 - hosts: localhost
   gather_facts: no
   vars:
-    ami_id: ami-02eac2c0129f6376b
+    ami_id: ami-0c322300a1dd5dc79
     keypair: cyberark-pasaas
     region: us-east-1
     security_group: sg-035eb1a11c4584d01
@@ -9,13 +9,13 @@
     type: t2.micro
 
   tasks:
-    - name: Start CentOS 7 AWS EC2 Instance
+    - name: Start RHEL 8 AWS EC2 Instance
       ec2:
         assign_public_ip: no
         group_id: "{{ security_group }}"
         image: "{{ ami_id }}"
         instance_tags:
-          Name: CentOS Client
+          Name: RHEL Client
           role: client
         instance_type: "{{ type }}"
         key_name: "{{ keypair }}"
