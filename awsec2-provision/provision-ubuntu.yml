@@ -1,0 +1,31 @@
+- hosts: all
+  gather_facts: no
+  vars:
+    ami_id: ami-07d0cf3af28718ef8
+    keypair: cyberark-pasaas
+    region: us-east-1
+    security_group: sg-035eb1a11c4584d01
+    subnet: subnet-08f9e42a174453e28
+    type: t2.micro
+
+  tasks:
+    - name: Start Ubuntu AWS EC2 Instance
+      ec2:
+        assign_public_ip: no
+        group_id: "{{ security_group }}"
+        image: "{{ ami_id }}"
+        instance_tags:
+          Name: Ubuntu Client
+          role: client
+        instance_type: "{{ type }}"
+        key_name: "{{ keypair }}"
+        region: "{{ region }}"
+        vpc_subnet_id: "{{ subnet }}"
+      register: ec2
+
+    - name: Wait for SSH to come up
+      delegate_to: "{{ item.public_dns_name }}"
+      wait_for_connection:
+        delay: 60
+        timeout: 320
+      loop: "{{ ec2.instances }}"
