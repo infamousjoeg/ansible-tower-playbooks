@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: localhost
   gather_facts: no
   vars:
     ami_id: ami-07d0cf3af28718ef8
