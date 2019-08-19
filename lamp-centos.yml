@@ -3,6 +3,11 @@
   gather_facts: yes
 
   pre_tasks:
+    - name: Install EPEL Release Repository
+      yum:
+        name: ['epel-release']
+        state: present
+
     - name: Install Apache & PHP
       yum:
         name: ['httpd', 'php', 'php-mysql']
