@@ -1,5 +1,5 @@
 ---
-- hosts: client_centos
+- hosts: tag_role_client_centos
   gather_facts: yes
 
   pre_tasks:
