@@ -16,7 +16,7 @@
         image: "{{ ami_id }}"
         instance_tags:
           Name: CentOS Client
-          role: client
+          role: client_centos
         instance_type: "{{ type }}"
         key_name: "{{ keypair }}"
         region: "{{ region }}"

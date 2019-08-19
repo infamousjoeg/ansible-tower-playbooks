@@ -16,7 +16,7 @@
         image: "{{ ami_id }}"
         instance_tags:
           Name: Ubuntu Client
-          role: client
+          role: client_ubuntu
         instance_type: "{{ type }}"
         key_name: "{{ keypair }}"
         region: "{{ region }}"

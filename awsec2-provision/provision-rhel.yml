@@ -16,7 +16,7 @@
         image: "{{ ami_id }}"
         instance_tags:
           Name: RHEL Client
-          role: client
+          role: client_rhel
         instance_type: "{{ type }}"
         key_name: "{{ keypair }}"
         region: "{{ region }}"
