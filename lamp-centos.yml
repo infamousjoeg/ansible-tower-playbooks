@@ -102,11 +102,11 @@
 
   roles:
     - role: infamousjoeg.provisioning
-      cyberark_api_base_url: "{{ env.CYBERARK_API_URL }}"
+      cyberark_api_base_url: "{{ CYBERARK_API_URL }}"
       cyberark_auth_type: LDAP
       cyberark_validate_certs: yes
-      cyberark_username: "{{ env.CYBERARK_API_USERNAME }}"
-      cyberark_password: "{{ env.CYBERARK_API_PASSWORD }}"
+      cyberark_username: "{{ CYBERARK_API_USERNAME }}"
+      cyberark_password: "{{ CYBERARK_API_PASSWORD }}"
       cyberark_acct_name: "AWSEC2-MySQL-{{ mysql_address }}-{{ mysql_username }}"
       cyberark_acct_address: "{{ mysql_address }}"
       cyberark_acct_username: "{{ mysql_username }}"
