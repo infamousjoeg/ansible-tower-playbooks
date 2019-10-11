@@ -4,16 +4,9 @@
     region: us-east-1
 
   tasks:
-    - name: Get Ubuntu AWS EC2 Instance IDs
-      ec2_instance_facts:
-        region: "{{ region }}"
-        filters:
-          "tag:role": client_ubuntu
-      register: ec2_instances
-
     - name: Terminate All Ubuntu AWS EC2 Instances
-      ec2:
-        region: "{{ region }}"
-        instance_ids: "{{ item.id }}"
+      ec2_instance:
         state: absent
-      with_items: "{{ ec2_instances }}"
+        filters:
+          "tag:Name": Ubuntu Client
+          "tag:role": client_ubuntu
