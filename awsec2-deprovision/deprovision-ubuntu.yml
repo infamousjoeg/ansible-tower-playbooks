@@ -8,7 +8,7 @@
       ec2_instance_facts:
         region: "{{ region }}"
         filters:
-          "tag:role": ubuntu-client
+          "tag:role": client_ubuntu
       register: ec2_instances
 
     - name: Terminate All Ubuntu AWS EC2 Instances

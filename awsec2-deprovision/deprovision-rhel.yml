@@ -8,7 +8,7 @@
       ec2_instance_facts:
         region: "{{ region }}"
         filters:
-          "tag:role": rhel-client
+          "tag:role": client_rhel
       register: ec2_instances
 
     - name: Terminate All RHEL AWS EC2 Instances
