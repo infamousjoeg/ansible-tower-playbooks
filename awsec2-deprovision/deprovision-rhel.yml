@@ -1,0 +1,19 @@
+- hosts: localhost
+  gather_facts: no
+  vars:
+    region: us-east-1
+
+  tasks:
+    - name: Get RHEL AWS EC2 Instance IDs
+      ec2_instance_facts:
+        region: "{{ region }}"
+        filters:
+          "tag:role": rhel-client
+      register: ec2_instances
+
+    - name: Terminate All RHEL AWS EC2 Instances
+      ec2:
+        region: "{{ region }}"
+        instance_ids: "{{ item }}"
+        state: absent
+      with_items: "{{ ec2_instances }}"
