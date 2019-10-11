@@ -11,12 +11,9 @@
           "tag:role": client_ubuntu
       register: ec2_instances
 
-    - name: Debug ec2_instances variable
-      debug: var=ec2_instances
-
-    #- name: Terminate All Ubuntu AWS EC2 Instances
-    #  ec2:
-    #    region: "{{ region }}"
-    #    instance_ids: "{{ item }}"
-    #    state: absent
-    #  with_items: "{{ ec2_instances }}"
+    - name: Terminate All Ubuntu AWS EC2 Instances
+      ec2:
+        region: "{{ region }}"
+        instance_ids: "{{ item.instances.instance_id }}"
+        state: absent
+      with_items: "{{ ec2_instances }}"
