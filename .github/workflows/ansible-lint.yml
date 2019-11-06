@@ -1,0 +1,26 @@
+name: Ansible Lint
+
+on: push
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Lint AWS EC2 Deprovision Playbooks
+      uses: ansible/ansible-lint-action@master
+      with:
+        targets: "awsec2-deprovision/deprovision-all.yml awsec2-deprovision/deprovision-centos.yml awsec2-deprovision/deprovision-rhel.yml awsec2-deprovision/deprovision-ubuntu.yml"
+        args: ""
+    - name: Lint AWS EC2 Provision Playbooks
+      uses: ansible/ansible-lint-action@master
+      with:
+        targets: "awsec2-provision/provision-all.yml awsec2-provision/provision-centos.yml awsec2-provision/provision-rhel.yml awsec2-provision/provision-ubuntu.yml"
+        args: ""
+    - name: Lint LAMP Deployment Playbooks
+      uses: ansible/ansible-lint-action@master
+      with:
+        targets: "lamp-centos.yml"
+        args: ""
