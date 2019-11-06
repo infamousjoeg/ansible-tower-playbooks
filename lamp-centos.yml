@@ -86,8 +86,8 @@
         src: files/dump.sql
         dest: /tmp/dump.sql
 
-    - name: Insert sample data into demo table in MySQL # noqa 301
-      shell: "mysql -u {{ mysql_username }} -p{{ mysql_password }} demo < /tmp/dump.sql > /dev/null 2>&1"
+    - name: Insert sample data into demo table in MySQL
+      shell: "mysql -u {{ mysql_username }} -p{{ mysql_password }} demo < /tmp/dump.sql > /dev/null 2>&1" # noqa 301
       no_log: yes
 
     - name: Restart Apache
