@@ -35,13 +35,13 @@
         dest: "/var/www/html/index.php"
         content: |
           <?php echo "Hello World!"; ?>
-      
+
     - name: Install MariaDB Package
       yum:
         name: ['mariadb-server', 'MySQL-python']
         state: present
 
-    - name: Configure SELinux to Start MySQL on Any Port 
+    - name: Configure SELinux to Start MySQL on Any Port
       seboolean:
         name: mysql_connect_any
         state: true
@@ -85,12 +85,12 @@
       copy:
         src: files/dump.sql
         dest: /tmp/dump.sql
-    
+
     - name: Insert sample data into demo table in MySQL
       shell: "mysql -u {{ mysql_username }} -p{{ mysql_password }} demo < /tmp/dump.sql > /dev/null 2>&1"
       no_log: yes
 
-    - name: Restart Apache 
+    - name: Restart Apache
       service:
         name: httpd
         state: restarted
