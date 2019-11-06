@@ -86,7 +86,7 @@
         src: files/dump.sql
         dest: /tmp/dump.sql
 
-    - name: Insert sample data into demo table in MySQL
+    - name: Insert sample data into demo table in MySQL # noqa 301
       shell: "mysql -u {{ mysql_username }} -p{{ mysql_password }} demo < /tmp/dump.sql > /dev/null 2>&1"
       no_log: yes
 
