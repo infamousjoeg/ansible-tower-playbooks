@@ -23,4 +23,4 @@ jobs:
       uses: ansible/ansible-lint-action@master
       with:
         targets: "lamp-centos.yml"
-        args: ""
+        args: "-x 301"
