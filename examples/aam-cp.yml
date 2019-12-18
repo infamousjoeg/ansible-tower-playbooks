@@ -1,0 +1,15 @@
+- hosts: localhost
+  gather_facts: yes
+  vars:
+    appid: "AnsibleCP"
+    query: "safe=D-AWS-AccessKeys;username=AnsibleAWSUser"
+    output: "PassProps.Username,Password"
+
+  tasks:
+  - name: Display results from AAM Credential Provider request
+    debug:
+      msg: "{{ item }}"
+    with_cyberarkpassword:
+      appid: "{{ appid }}"
+      query: "{{ query }}"
+      output: "{{ output }}"
