@@ -5,6 +5,11 @@
     region: us-east-1
   
   tasks:
-    - name: Display all EC2 Instance Facts
+    - name: Gather all EC2 Instance facts
       ec2_instance_facts:
         region: "{{ region }}"
+      register: ec2_facts
+      
+    - name: Display all gathered facts
+      debug:
+        msg: "{{ ec2_facts }}"
