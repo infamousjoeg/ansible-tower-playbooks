@@ -1,5 +1,5 @@
 ---
-- name: Display Ansible Host Facts
+- hosts: all
   gather_facts: yes
 
   tasks:
