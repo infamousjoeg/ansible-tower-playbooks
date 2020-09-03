@@ -7,3 +7,4 @@
   tasks:
     - name: Display all EC2 Instance Facts
       ec2_instance_facts:
+        region: "{{ region }}"
