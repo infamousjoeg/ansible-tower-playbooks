@@ -3,6 +3,6 @@
   gather_facts: yes
 
   tasks:
-    - name: 
+    - name: Show Localhost Facts
       debug:
         msg: "{{ansible_mounts}}"
