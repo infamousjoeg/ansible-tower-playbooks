@@ -3,7 +3,7 @@ name: Ansible Lint
 on: push
 
 jobs:
-  build:
+  lint:
 
     runs-on: ubuntu-latest
 
@@ -12,15 +12,15 @@ jobs:
     - name: Lint AWS EC2 Deprovision Playbooks
       uses: ansible/ansible-lint-action@master
       with:
-        targets: "awsec2-deprovision/deprovision-centos.yml awsec2-deprovision/deprovision-rhel.yml awsec2-deprovision/deprovision-ubuntu.yml"
+        targets: "awsec2-deprovision/"
         args: ""
     - name: Lint AWS EC2 Provision Playbooks
       uses: ansible/ansible-lint-action@master
       with:
-        targets: "awsec2-provision/provision-centos.yml awsec2-provision/provision-rhel.yml awsec2-provision/provision-ubuntu.yml"
+        targets: "awsec2-provision/"
         args: ""
-    - name: Lint LAMP Deployment Playbooks
+    - name: Lint Root Repository Playbooks
       uses: ansible/ansible-lint-action@master
       with:
-        targets: "lamp-centos.yml"
+        targets: "/"
         args: "-x 301"
