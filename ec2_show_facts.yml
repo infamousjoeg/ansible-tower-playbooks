@@ -1,6 +1,8 @@
 ---
 - hosts: localhost
   gather_facts: no
+  vars:
+    region: us-east-1
   
   tasks:
     - name: Display all EC2 Instance Facts
