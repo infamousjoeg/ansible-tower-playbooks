@@ -4,4 +4,4 @@
   
   tasks:
     - name: Display all EC2 Instance Facts
-      ec2_instance_info:
+      ec2_instance_facts:
