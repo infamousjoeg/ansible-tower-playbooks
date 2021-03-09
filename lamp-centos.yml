@@ -81,6 +81,21 @@
         host: localhost
         state: present
       no_log: yes
+      
+    - name: Onboard MySQL local account to CyberArk
+      cyberark.pas.cyberark_account:
+        logging_level: DEBUG
+        identified_by: "address,username"
+        safe: "MySQL Local Accounts"
+        address: "{{ mysql_address }}"
+        username: "{{ mysql_username }}"
+        platform_id: MySQL
+        secret: "{{ mysql_password }}"
+        secret_management:
+            automatic_management_enabled: true
+        state: present
+        cyberark_session: "{{ cyberark_session }}"
+      register: cyberarkaction
 
     - name: Copy sample data to local filesystem /tmp/
       copy:
@@ -102,19 +117,3 @@
         src: files/db.php
         dest: /var/www/html/db.php
         mode: '0777'
-
-  roles:
-    - role: infamousjoeg.provisioning
-      cyberark_api_base_url: "{{ CYBERARK_API_URL }}"
-      cyberark_auth_type: LDAP
-      cyberark_validate_certs: yes
-      cyberark_username: "{{ CYBERARK_API_USERNAME }}"
-      cyberark_password: "{{ CYBERARK_API_PASSWORD }}"
-      cyberark_acct_name: "AWSEC2-MySQL-{{ mysql_address }}-{{ mysql_username }}"
-      cyberark_acct_address: "{{ mysql_address }}"
-      cyberark_acct_username: "{{ mysql_username }}"
-      cyberark_acct_password: "{{ mysql_password }}"
-      cyberark_acct_platformId: MySQL
-      cyberark_acct_safeName: D-MySQL-Users
-      cyberark_acct_secretType: password
-      cyberark_acct_autoManagement: yes
