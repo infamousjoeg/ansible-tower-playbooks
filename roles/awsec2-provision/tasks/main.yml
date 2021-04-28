@@ -1,5 +1,5 @@
 ---
-- name: Start RHEL 8 AWS EC2 Instance
+- name: Starting AWS EC2 Instance
   ec2:
     assign_public_ip: "{{ assign_public_ip }}"
     group_id: "{{ security_group }}"
