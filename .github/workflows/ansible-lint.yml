@@ -9,16 +9,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Lint AWS EC2 Deprovision Playbooks
+    - name: Lint AWS EC2 Provision Role
       uses: ansible/ansible-lint-action@master
       with:
-        targets: "awsec2-deprovision/"
-        args: ""
-    - name: Lint AWS EC2 Provision Playbooks
+        targets: "roles/awsec2-provision/tasks"
+    - name: Lint AWS EC2 Deprovision Role
       uses: ansible/ansible-lint-action@master
       with:
-        targets: "awsec2-provision/"
-        args: ""
+        targets: "roles/awsec2-deprovision/tasks"
     - name: Lint Root Repository Playbooks
       uses: ansible/ansible-lint-action@master
       with:

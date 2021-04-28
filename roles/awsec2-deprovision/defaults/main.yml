@@ -1,2 +1,3 @@
 ---
-# defaults file for roles/awsec2-deprovision
+region: us-east-1
+tag_role: client_rhel
