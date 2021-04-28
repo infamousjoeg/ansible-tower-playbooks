@@ -1,6 +1,6 @@
 ---
 - name: Get AWS EC2 Instance IDs
-  ec2_instance_facts:
+  ec2_instance_info:
     region: "{{ region }}"
     filters:
       "tag:role": "{{ tag_role }}"
