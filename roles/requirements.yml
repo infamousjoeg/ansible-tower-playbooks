@@ -1,2 +1,3 @@
 ---
-- src: infamousjoeg.provisioning
+roles:
+  - name: infamousjoeg.provisioning
