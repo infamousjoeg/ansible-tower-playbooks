@@ -2,8 +2,6 @@
 - name: Gather all EC2 Instance facts
   ec2_instance_info:
     region: "{{ region }}"
-    filters:
-      "tag:role": "{{ tag_role }}"
   register: ec2_facts
 
 - name: Display all gathered facts
