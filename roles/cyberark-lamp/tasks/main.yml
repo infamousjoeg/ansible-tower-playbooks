@@ -3,21 +3,6 @@
 # DO Community Playbooks: LAMP on Ubuntu 18.04
 # https://github.com/do-community/ansible-playbooks
 ###################################################
-- name: Retrieve EC2 Instance Facts
-  import_role:
-    name: awsec2-showfacts
-  vars:
-    tag_role: client_ubuntu
-  register: ec2_host
-
-- name: Create A Record in CloudFlare DNS
-  cloudflare_dns:
-    zone: joegarcia.dev
-    record: lampdemo
-    type: A
-    value: "{{ ec2_host.instances[0].public_ip_address }}"
-    account_email: "{{ lookup('env', 'CLOUDFLARE_EMAIL_ADDRESS') }}"
-    account_api_key: "{{ lookup('env', 'CLOUDFLARE_API_KEY') }}"
 
 - name: Install prerequisites
   apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes

@@ -1,6 +1,6 @@
 ---
-app_user: "ubuntu"
-http_host: "lampdemo.joegarcia.dev"
-http_conf: "lampdemo.conf"
+app_user: "jgarcia"
+http_host: "lamp.joegarcia.lab"
+http_conf: "lamp.conf"
 http_port: "80"
 disable_default: true
