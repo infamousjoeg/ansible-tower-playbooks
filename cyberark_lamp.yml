@@ -1,2 +1,4 @@
-- roles:
+- hosts: client_ubuntu
+
+  roles:
     - { role: "roles/cyberark-lamp" }
