@@ -4,14 +4,14 @@
 # https://github.com/do-community/ansible-playbooks
 ###################################################
 - name: Retrieve EC2 Instance Facts
-  ansible.builtin.import_role:
+  import_role:
     name: awsec2-showfacts
   vars:
     tag_role: client_ubuntu
   register: ec2_host
 
 - name: Create A Record in CloudFlare DNS
-  community.general.cloudflare_dns:
+  cloudflare_dns:
     zone: joegarcia.dev
     record: lampdemo
     type: A
@@ -20,50 +20,50 @@
     account_api_key: "{{ lookup('env', 'CLOUDFLARE_API_KEY') }}"
 
 - name: Install prerequisites
-  ansible.builtin.apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
+  apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
   loop: [ 'aptitude' ]
 
 #Apache Configuration
 - name: Install LAMP Packages
-  ansible.builtin.apt: name={{ item }} update_cache=yes state=latest
+  apt: name={{ item }} update_cache=yes state=latest
   loop: [ 'apache2', 'mysql-server', 'python3-pymysql', 'php', 'php-mysql', 'libapache2-mod-php' ]
 
 - name: Create document root
-  ansible.builtin.file:
+  file:
     path: "/var/www/{{ http_host }}"
     state: directory
     owner: "{{ app_user }}"
     mode: '0755'
 
 - name: Set up Apache virtualhost
-  ansible.builtin.template:
+  template:
     src: "files/apache.conf.j2"
     dest: "/etc/apache2/sites-available/{{ http_conf }}"
   notify: Reload Apache
 
 - name: Enable new site
-  ansible.builtin.shell: /usr/sbin/a2ensite {{ http_conf }}
+  shell: /usr/sbin/a2ensite {{ http_conf }}
   notify: Reload Apache
 
 - name: Disable default Apache site
-  ansible.builtin.shell: /usr/sbin/a2dissite 000-default.conf
+  shell: /usr/sbin/a2dissite 000-default.conf
   when: disable_default
   notify: Reload Apache
 
 - name: Set Fact with Randomized Password for MySQL Database User
-  ansible.builtin.set_fact:
+  set_fact:
     mysql_password: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters') }}"
   no_log: yes
 
 # MySQL Configuration
 - name: Sets the root password
-  community.mysql.mysql_user:
+  mysql_user:
     name: root
     password: "{{ mysql_password }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
 - name: Removes all anonymous user accounts
-  community.mysql.mysql_user:
+  mysql_user:
     name: ''
     host_all: yes
     state: absent
@@ -71,14 +71,14 @@
     login_password: "{{ mysql_password }}"
 
 - name: Removes the MySQL test database
-  community.mysql.mysql_db:
+  mysql_db:
     name: test
     state: absent
     login_user: root
     login_password: "{{ mysql_password }}"
 
 - name: Create the MySQL demo database
-  community.mysql.mysql_db:
+  mysql_db:
     name: demo
     state: present
     collation: utf8_general_ci
@@ -87,13 +87,13 @@
 
 # Copy database dump file to remote host and restore it to database 'demo'
 - name: Copy database dump file
-  ansible.builtin.copy:
+  copy:
     src: files/dump.sql
     dest: /tmp
     mode: '0777'
 
 - name: Restore database
-  community.mysql.mysql_db:
+  mysql_db:
     name: demo
     state: import
     target: /tmp/dump.sql
@@ -103,19 +103,19 @@
 # TODO: Onboard {{ mysql_password }} to CyberArk
 
 - name: Unset mysql_password Fact
-  ansible.builtin.set_fact:
+  set_fact:
     mysql_password:
 
 # UFW Configuration
 - name: "UFW - Allow HTTP on port {{ http_port }}"
-  community.general.ufw:
+  ufw:
     rule: allow
     port: "{{ http_port }}"
     proto: tcp
 
 # PHP Info Page
 - name: Sets Up PHP Info Page
-  ansible.builtin.copy:
+  copy:
     src: "files/info.php"
     dest: "/var/www/{{ http_host }}/info.php"
     mode: '0777'
@@ -129,7 +129,7 @@
 
 # PHP Index Page
 - name: Create index.php Start Page
-  ansible.builtin.copy:
+  copy:
     dest: "/var/www/{{ http_host }}/index.php"
     content: |
       <?php echo "Hello World!"; ?>
