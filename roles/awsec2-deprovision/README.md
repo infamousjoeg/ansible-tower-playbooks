@@ -7,7 +7,7 @@ Requirements
 ------------
 
 * boto3
-  * `$ pip3 install boto3`
+  * `$ pip3 install boto3 --user`
 
 Role Variables
 --------------
@@ -23,6 +23,8 @@ Example Playbook
       roles:
          - { role: roles/awsec2-deprovision, tag_role: client_ubuntu }
 ```
+
+**NOTE:** In Ansible Tower, `extra_vars` can be provided in the Job Template rather than in the playbook.
 
 License
 -------
