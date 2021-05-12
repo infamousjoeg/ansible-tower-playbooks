@@ -1,4 +1,4 @@
-- hosts: client_ubuntu
+- hosts: sandbox
 
   roles:
     - { role: "roles/cyberark-lamp" }
