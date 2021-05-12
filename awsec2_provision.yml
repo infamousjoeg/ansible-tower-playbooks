@@ -1,4 +1,2 @@
-- hosts: localhost
-
-  roles:
+- roles:
     - { role: "roles/awsec2-provision" }
