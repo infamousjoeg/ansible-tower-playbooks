@@ -1,38 +1,49 @@
-Role Name
+cyberark-lamp
 =========
 
-A brief description of the role goes here.
+Deploys a LAMP stack (Linux, Apache, MySQL, PHP) in a secure manner. All secrets are randomized and immediate stored in [CyberArk Conjur Secrets Manager](https://conjur.org) for management. All secrets are retrieved from [CyberArk Conjur Secrets Manager](https://conjur.org) for use within the play using custom credential types or [Ansible Automation Platform Secrets Management Systems](https://docs.ansible.com/ansible-tower/latest/html/userguide/credential_plugins.html).
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+* PyMySQL
+  * `$ pip3 install pymysql --user`
+* community.general
+  * `$ ansible-galaxy collection install community.general`
+* community.mysql
+  * `$ ansible-galaxy collection install community.mysql`
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+* app_user
+* http_host
+* http_conf
+* http_port
+* disable_default
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+* [roles/awsec2-showfacts](../awsec2-showfacts)
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
+```yaml
+    - hosts: localhost
       roles:
-         - { role: username.rolename, x: 42 }
+        - { role: roles/cyberark_lamp.yml, app_user: ubuntu, http_host: lampdemo.joegarcia.dev, http_conf: lampdemo.conf, http_port: 80, disable_default: true}
+```
+
+**NOTE:** In Ansible Tower, `extra_vars` can be provided in the Job Template rather than in the playbook.
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Joe Garcia, DevOps Security Engineer, CyberArk - [Twitter](https://twitter.com/Joe_Garcia)

@@ -1,2 +1,10 @@
 ---
-# handlers file for roles/cyberark-lamp
+- name: Reload Apache
+  ansible.builtin.service:
+    name: apache2
+    state: reloaded
+
+- name: Restart Apache
+  ansible.builtin.service:
+    name: apache2
+    state: restarted

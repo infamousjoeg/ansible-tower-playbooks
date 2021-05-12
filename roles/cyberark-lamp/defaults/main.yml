@@ -1,2 +1,6 @@
 ---
-# defaults file for roles/cyberark-lamp
+app_user: "ubuntu"
+http_host: "lampdemo.joegarcia.dev"
+http_conf: "lampdemo.conf"
+http_port: "80"
+disable_default: true
