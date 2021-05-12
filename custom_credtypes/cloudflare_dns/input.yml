@@ -1,0 +1,13 @@
+fields:
+  - id: email_address
+    type: string
+    label: E-Mail Address
+    help_text: CloudFlare Account Username
+  - id: api_key
+    type: string
+    label: API Key
+    secret: true
+    help_text: CloudFlare Account API Key. You can obtain your API key from the bottom of the Cloudflare 'My Account' page, found at https://dash.cloudflare.com/.
+required:
+  - email_address
+  - api_key
