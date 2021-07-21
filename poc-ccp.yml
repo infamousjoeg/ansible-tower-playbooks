@@ -1,0 +1,11 @@
+- hosts: localhost
+
+- tasks:
+  - name: Display CyberArk REST API Credentials
+    debug:
+      msg:
+        - "Base URL: {{ CYBERARK_API_URL }}"
+        - "Username: {{ CYBERARK_API_USERNAME }}"
+        - "Password: {{ CYBERARK_API_PASSWORD }}"
+    # When not testing, the below line will prevent secret leakage to logs
+    #no_log: yes
