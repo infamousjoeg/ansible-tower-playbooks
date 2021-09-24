@@ -2,3 +2,4 @@
 rhel_ami_id: ami-0b0af3577fe5e3532
 ubuntu_ami_id: ami-09e67e426f25ce0d7
 amazon-linux_ami_id: ami-087c17d1fe0178315
+os_platform:
