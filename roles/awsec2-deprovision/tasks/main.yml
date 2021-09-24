@@ -1,4 +1,19 @@
 ---
+- name: Check if RHEL
+  set_fact:
+    tag_role: 'client_rhel'
+  when: os_platform == 'rhel'
+
+- name: Check if Ubuntu
+  set_fact:
+    tag_role: 'client_ubuntu'
+  when: os_platform == 'ubuntu'
+
+- name: Check if Amazon Linux
+  set_fact:
+    tag_role: 'client_amazon-linux'
+  when: os_platform == 'amazon-linux'
+
 - name: Get AWS EC2 Instance IDs
   ec2_instance_info:
     region: "{{ region }}"
