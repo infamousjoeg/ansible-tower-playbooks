@@ -13,10 +13,10 @@
   when: os_platform == 'ubuntu'
 - name: Check if Amazon Linux
   set_fact:
-    ami_id: "{{ amazon-linux_ami_id }}"
+    ami_id: "{{ amazonlinux_ami_id }}"
     instance_tags_name: 'Amazon Linux Client'
-    instance_tags_role: 'client_amazon-linux'
-  when: os_platform == 'amazon-linux'
+    instance_tags_role: 'client_amazonlinux'
+  when: os_platform == 'amazonlinux'
 - name: Starting AWS EC2 Instance
   ec2:
     assign_public_ip: "{{ assign_public_ip }}"

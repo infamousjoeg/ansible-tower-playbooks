@@ -11,8 +11,8 @@
 
 - name: Check if Amazon Linux
   set_fact:
-    tag_role: 'client_amazon-linux'
-  when: os_platform == 'amazon-linux'
+    tag_role: 'client_amazonlinux'
+  when: os_platform == 'amazonlinux'
 
 - name: Get AWS EC2 Instance IDs
   ec2_instance_info:
