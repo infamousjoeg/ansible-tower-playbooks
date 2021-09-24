@@ -1,0 +1,10 @@
+---
+ami_id: ami-0c322300a1dd5dc79
+assign_public_ip: yes
+instance_tags_name: RHEL Client
+instance_tags_role: client_rhel
+keypair: cyberark-pasaas
+region: us-east-1
+security_group: sg-035eb1a11c4584d01
+subnet: subnet-08f9e42a174453e28
+type: t2.micro

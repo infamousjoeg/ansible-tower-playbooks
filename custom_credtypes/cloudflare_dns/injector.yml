@@ -1,0 +1,3 @@
+extra_vars:
+  CLOUDFLARE_EMAIL_ADDRESS: '{{ email_address }}'
+  CLOUDFLARE_API_KEY: '{{ api_key }}'

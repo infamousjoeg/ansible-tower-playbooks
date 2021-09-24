@@ -1,0 +1,4 @@
+- hosts: sandbox
+
+  roles:
+    - { role: "roles/cyberark-lamp" }

@@ -1,7 +1,7 @@
 <?php
 $curl = curl_init();
 curl_setopt_array($curl, array(
-    CURLOPT_URL => "https://pvwa.192.168.3.102.xip.io/AIMWebService/api/Accounts?AppID=HelloWorldPHP&Safe=D-MYSQL-LOCAL-USERS&Folder=Root&Object=MYSQL-DEMO-USER",
+    CURLOPT_URL => "https://pvwa.joegarcia.lab/AIMWebService/api/Accounts?AppID=AnsibleLAMPDemo&Safe=D-MYSQL-LOCAL-USERS&Folder=Root&Object=MYSQL-LAMP-USER",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => "",
     CURLOPT_MAXREDIRS => 10,

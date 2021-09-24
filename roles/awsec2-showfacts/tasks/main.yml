@@ -1,0 +1,26 @@
+---
+- name: Check if RHEL
+  set_fact:
+    tag_role: 'client_rhel'
+  when: os_platform == 'rhel'
+
+- name: Check if Ubuntu
+  set_fact:
+    tag_role: 'client_ubuntu'
+  when: os_platform == 'ubuntu'
+
+- name: Check if Amazon Linux
+  set_fact:
+    tag_role: 'client_amazonlinux'
+  when: os_platform == 'amazonlinux'
+
+- name: Gather all EC2 Instance facts
+  ec2_instance_info:
+    region: "{{ region }}"
+    filters:
+      "tag:role": "{{ tag_role }}"
+  register: ec2_facts
+
+- name: Display all gathered facts
+  debug:
+    msg: "{{ ec2_facts }}"
