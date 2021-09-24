@@ -4,19 +4,19 @@
     ami_id: "{{ rhel_ami_id }}"
     instance_tags_name: 'RHEL Client'
     instance_tags_role: 'client_rhel'
-    when: os_platform == 'rhel'
+  when: os_platform == 'rhel'
 - name: Check if Ubuntu
   set_fact:
     ami_id: "{{ ubuntu_ami_id }}"
     instance_tags_name: 'Ubuntu Client'
     instance_tags_role: 'client_ubuntu'
-    when: os_platform == 'ubuntu'
+  when: os_platform == 'ubuntu'
 - name: Check if Amazon Linux
   set_fact:
     ami_id: "{{ amazon-linux_ami_id }}"
     instance_tags_name: 'Amazon Linux Client'
     instance_tags_role: 'client_amazon-linux'
-    when: os_platform == 'amazon-linux'
+  when: os_platform == 'amazon-linux'
 - name: Starting AWS EC2 Instance
   ec2:
     assign_public_ip: "{{ assign_public_ip }}"
