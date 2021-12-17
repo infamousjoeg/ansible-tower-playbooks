@@ -1,0 +1,5 @@
+extra_vars:
+  CYBERARK_API_PASSWORD: '{{ cyberark_password }}'
+  CYBERARK_API_URL: '{{ cyberark_pvwa_url }}'
+  CYBERARK_API_USERNAME: '{{ cyberark_username }}'
+  CYBERARK_API_AUTH_TYPE: '{{ cyberark_auth_type }}'
