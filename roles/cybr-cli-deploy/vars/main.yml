@@ -1,2 +1,6 @@
 ---
-# vars file for roles/cybr-cli-deploy
+cyberark:
+  pvwa_url: '{{ lookup("env", "CYBERARK_APU_URL") }}'
+  auth_type: '{{ lookup("env", "CYBERARK_API_AUTH_TYPE") }}'
+  username: '{{ lookup("env", "CYBERARK_API_USERNAME") }}'
+  password: '{{ lookup("env", "CYBERARK_API_PASSWORD") }}'

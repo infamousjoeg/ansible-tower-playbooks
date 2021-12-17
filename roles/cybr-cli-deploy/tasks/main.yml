@@ -1,11 +1,11 @@
 ---
-
-- name: Install Pre-Requisites
-  ansible.builtin.pip:
-    name: boto3
 - name: Download Latest Release
-  ansible.builtin.get_url:
-    url: 'http://cybr-cli-releases.s3.amazonaws.com/{{ latest_release_date }}linux_cybr'
+  amazon.aws.aws_s3:
+    bucket: cybr-cli-releases
+    object: "{{ ansible_date_time.date }}_linux_cybr"
     dest: /usr/local/bin/cybr
-    mode: '0755'
+    mode: get
 - name: Login to cybr-cli for PAS
+  ansible.builtin.command: |
+    "cybr logon -u {{ cyberark.username }} -a {{ cyberark.auth_type }} -b {{ cyberark.pvwa_url }} -p {{ cyberark.password }} --non-interactive"
+  register: cybrlogon
