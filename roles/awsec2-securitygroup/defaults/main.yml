@@ -1,0 +1,8 @@
+---
+region: us-east-1
+pasaas_vpc_id: vpc-06d9481a2c34afb07
+conjur_instance_id: i-0baecb6c9faa4fa56
+conjur_sg: sg-029c2e642aaacb1a3
+pasaas_external_sg: sg-09b3a0d8294f653a3
+pasaas_internal_sg: sg-035eb1a11c4584d01
+ssh_sg: sg-0799cc91fe0ed6485

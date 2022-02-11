@@ -1,0 +1,30 @@
+---
+# Create Temporary Conjur Access security group and apply to PASaaS Conjur EC2 Instance
+# when update is selected from Job Template survey.
+- name: Create Temporary Conjur Access EC2 Security Group
+  amazon.aws.ec2_group:
+    name: Temporary Conjur Access
+    description: A security group providing temporary access to Conjur applied by Ansible
+    region: "{{ region }}"
+    vpc_id: "{{ pasaas_vpc_id }}"
+    rules:
+      - proto: tcp
+        ports: 443
+        cidr_ip: "{{ ip_address }}"
+  when: update | bool
+  register: new_security_group
+- name: Add Temporary Conjur Access to PASaaS Conjur EC2 Instance
+  amazon.aws.ec2:
+    instance_ids: "{{ conjur_instance_id }}"
+    region: "{{ region }}"
+    groups: ["{{ new_security_group.group_id }}", "{{ conjur_sg }}", "{{ pasaas_external_sg }}", "{{ pasaas_internal_sg }}", "{{ ssh_sg }}"]
+  when: update | bool
+
+# Remove Temporary Conjur Access security group from PASaaS Conjur EC2 instance when update
+# is not selected from Job Template survey.
+- name: Remove Temporary Conjur Access EC2 Security Group
+  amazon.aws.ec2:
+    name: Temporary Conjur Acccess
+    region: "{{ region }}"
+    state: absent
+  when: not update    
