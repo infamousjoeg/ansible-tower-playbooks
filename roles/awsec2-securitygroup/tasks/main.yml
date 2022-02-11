@@ -11,14 +11,14 @@
       - proto: tcp
         ports: 443
         cidr_ip: "{{ ip_address }}"
-  when: update | bool
+  when: update == 'Yes'
   register: new_security_group
 - name: Add Temporary Conjur Access to PASaaS Conjur EC2 Instance
   amazon.aws.ec2:
     instance_ids: "{{ conjur_instance_id }}"
     region: "{{ region }}"
     groups: ["{{ new_security_group.group_id }}", "{{ conjur_sg }}", "{{ pasaas_external_sg }}", "{{ pasaas_internal_sg }}", "{{ ssh_sg }}"]
-  when: update | bool
+  when: update == 'Yes'
 
 # Remove Temporary Conjur Access security group from PASaaS Conjur EC2 instance when update
 # is not selected from Job Template survey.
@@ -27,4 +27,4 @@
     name: Temporary Conjur Acccess
     region: "{{ region }}"
     state: absent
-  when: not update    
+  when: update == 'No'  
