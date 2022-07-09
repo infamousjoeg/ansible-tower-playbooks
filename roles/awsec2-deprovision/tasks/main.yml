@@ -33,6 +33,7 @@
 
 - name: Terminate All AWS EC2 Instances
   amazon.aws.ec2_instance:
+    region: "{{ region }}"
     filters:
       instance-state-name: running
     state: absent
