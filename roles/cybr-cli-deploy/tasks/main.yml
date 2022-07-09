@@ -1,4 +1,8 @@
 ---
+- name: Install curl
+  ansible.builtin.package:
+    name: curl
+    state: present
 - name: Install Latest Homebrew (brew.sh)
   ansible.builtin.command: |
     "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
