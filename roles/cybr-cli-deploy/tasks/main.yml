@@ -3,6 +3,9 @@
   ansible.builtin.package:
     name: curl
     state: present
+  environment:
+    ansible_python_interpreter: /usr/libexec/platform-python
+  when: variables.tags.role == "client_rhel"
 - name: Install Latest Homebrew (brew.sh)
   ansible.builtin.command: |
     "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
