@@ -1,4 +1,4 @@
-- hosts: localhost
+- hosts: all
 
   roles:
     - { role: "roles/cybr-cli-deploy" }
