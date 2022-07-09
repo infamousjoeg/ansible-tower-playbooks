@@ -15,7 +15,7 @@
   when: os_platform == 'amazonlinux'
 
 - name: Get AWS EC2 Instance IDs
-  ec2_instance_info:
+  amazon.aws.ec2_instance_info:
     region: "{{ region }}"
     filters:
       "tag:role": "{{ tag_role }}"
