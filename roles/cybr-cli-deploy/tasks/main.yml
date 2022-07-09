@@ -1,11 +1,13 @@
 ---
-- name: Download Latest Release
-  amazon.aws.aws_s3:
-    bucket: cybr-cli-releases
-    object: "{{ ansible_date_time.date }}_linux_cybr"
-    dest: /usr/local/bin/cybr
-    mode: get
+- name: Install Latest Homebrew (brew.sh)
+  ansible.builtin.command: |
+    "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+- name: brew install cybr-cli
+  ansible.builtin.command: |
+    "brew install infamousjoeg/tap/cybr-cli"
 - name: Login to cybr-cli for PAS
   ansible.builtin.command: |
     "cybr logon -u {{ cyberark.username }} -a {{ cyberark.auth_type }} -b {{ cyberark.pvwa_url }} -p {{ cyberark.password }} --non-interactive"
-  register: cybrlogon
+- name: List All Accounts in PAS
+  ansible.builtin.command: |
+    "cybr accounts list"
