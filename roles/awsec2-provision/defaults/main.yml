@@ -5,6 +5,6 @@ instance_tags_name: RHEL Client
 instance_tags_role: client_rhel
 keypair: cyberark-pasaas
 region: us-east-1
-security_group: sg-035eb1a11c4584d01
+security_group: [ sg-035eb1a11c4584d01, sg-09130019dae543c7f ]
 subnet: subnet-08f9e42a174453e28
 type: t2.micro
