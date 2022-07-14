@@ -2,7 +2,7 @@
 - name: Download Homebrew Installer (brew.sh)
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
-    dest: /tmp/install
+    dest: /tmp/install.sh
 
 - name: Install Latest Homebrew (brew.sh)
   ansible.builtin.shell: /tmp/install/install.sh
