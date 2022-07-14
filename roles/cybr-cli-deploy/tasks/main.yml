@@ -5,9 +5,11 @@
     state: present
   environment:
     ansible_python_interpreter: /usr/libexec/platform-python
+  become: yes
 - name: Install Latest Homebrew (brew.sh)
   ansible.builtin.command: |
-    "curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash -s"
+    "curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | sudo bash -s"
+  become: yes
 - name: brew install cybr-cli
   ansible.builtin.command: |
     "brew install infamousjoeg/tap/cybr-cli"
