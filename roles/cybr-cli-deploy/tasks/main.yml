@@ -5,7 +5,7 @@
     dest: /tmp/install.sh
 
 - name: Install Latest Homebrew (brew.sh)
-  ansible.builtin.shell: /tmp/install/install.sh
+  ansible.builtin.shell: /tmp/install.sh
   become: yes
 
 - name: brew install cybr-cli
