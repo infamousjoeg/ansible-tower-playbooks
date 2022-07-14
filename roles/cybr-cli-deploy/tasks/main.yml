@@ -8,7 +8,7 @@
   when: ansible_facts['os_family'] == "RHEL"
 - name: Install Latest Homebrew (brew.sh)
   ansible.builtin.command: |
-    "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+    "curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash -s"
 - name: brew install cybr-cli
   ansible.builtin.command: |
     "brew install infamousjoeg/tap/cybr-cli"
