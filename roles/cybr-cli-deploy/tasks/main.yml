@@ -1,15 +1,10 @@
 ---
-- name: Download Homebrew Installer (brew.sh)
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
-    dest: /tmp/install.sh
-
-- name: Install Latest Homebrew (brew.sh)
-  ansible.builtin.shell: /tmp/install.sh
+- name: Download & Install Latest cybr-cli
+  ansible.builtin.unarchive:
+    src: https://github.com/infamousjoeg/cybr-cli/releases/download/latest/cybr-cli_linux_amd64.tar.gz
+    dest: /usr/local/bin
+    remote_src: yes
   become: yes
-
-- name: brew install cybr-cli
-  ansible.builtin.shell: brew install infamousjoeg/tap/cybr-cli
 
 - name: Login to cybr-cli for PAS
   ansible.builtin.shell: "cybr logon -u {{ cyberark.username }} -a {{ cyberark.auth_type }} -b {{ cyberark.pvwa_url }} -p {{ cyberark.password }} --non-interactive"
