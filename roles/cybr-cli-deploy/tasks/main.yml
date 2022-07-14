@@ -1,7 +1,7 @@
 ---
 - name: Download & Install Latest cybr-cli
   ansible.builtin.unarchive:
-    src: https://github.com/infamousjoeg/cybr-cli/releases/download/latest/cybr-cli_linux_amd64.tar.gz
+    src: https://github.com/infamousjoeg/cybr-cli/releases/latest/download/cybr-cli_linux_amd64.tar.gz
     dest: /usr/local/bin
     remote_src: yes
   become: yes
