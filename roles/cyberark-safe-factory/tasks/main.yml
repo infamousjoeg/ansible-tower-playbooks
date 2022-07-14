@@ -1,2 +1,16 @@
 ---
-# tasks file for roles/cyberark-safe-factory
+- name: Download & Install cybr-cli
+
+- name: Set Environment Variables for cybr logon --non-interactive
+
+- name: Logon to CyberArk PVWA API Non-Interactively
+
+- name: Create Safe in CyberArk Vault
+
+- name: Add Vault Admins as Safe Member
+
+- name: Add Vault Auditors as Safe Member
+
+- name: Logoff CyberArk PVWA API
+
+- name: Cleanup cybr-cli
