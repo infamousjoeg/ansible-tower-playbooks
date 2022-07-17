@@ -17,9 +17,13 @@
       delegate_to: localhost
       changed_when: false
       no_log: yes
+    
+    - name: Set SSH Private Key Path to Fact
+      set_fact:
+        host_privkey: "{{ temp_key.path }}"
 
   vars:
-    ansible_ssh_private_key_file: "{{ temp_key.path }}"
+    ansible_ssh_private_key_file: "{{ host_privkey }}"
 
   tasks:
     - debug:
