@@ -1,8 +1,9 @@
 ---
-- hosts: localhost
-  gather_facts: no
+- hosts: all
 
   tasks:
+    - debug:
+        var: test_hostname
     - name: "Display Machine Credential SSH Private Key"
       debug:
         msg: "{{ ansible_ssh_private_key }}"
