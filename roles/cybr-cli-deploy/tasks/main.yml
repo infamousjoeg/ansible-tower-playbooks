@@ -16,4 +16,4 @@
 
 - name: List All Accounts in PAS
   debug:
-    msg: '{{ accounts }}'
+    msg: '{{ accounts.stdout }}'
