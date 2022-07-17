@@ -4,3 +4,4 @@ cyberark:
   auth_type: '{{ lookup("env", "CYBERARK_API_AUTH_TYPE") }}'
   username: '{{ lookup("env", "CYBERARK_API_USERNAME") }}'
   password: '{{ lookup("env", "CYBERARK_API_PASSWORD") }}'
+  test: test
