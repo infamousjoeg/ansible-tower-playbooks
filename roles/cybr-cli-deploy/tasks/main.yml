@@ -17,3 +17,9 @@
 - name: List All Accounts in PAS
   debug:
     msg: '{{ accounts.stdout }}'
+
+- name: Cleanup cybr-cli
+  ansible.builtin.shell: rm -f /usr/local/bin/cybr
+  tags:
+    - always
+  become: yes
