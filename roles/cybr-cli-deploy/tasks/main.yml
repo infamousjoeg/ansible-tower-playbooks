@@ -10,5 +10,10 @@
   ansible.builtin.shell: "cybr logon -u {{ cyberark.username }} -a {{ cyberark.auth_type }} -b {{ cyberark.pvwa_url }} -p {{ cyberark.password }} --non-interactive"
   no_log: yes
 
-- name: List All Accounts in PAS
+- name: Get All Accounts in PAS
   ansible.builtin.shell: cybr accounts list
+  register: accounts
+
+- name: List All Accounts in PAS
+  debug:
+    msg: '{{ accounts }}'
