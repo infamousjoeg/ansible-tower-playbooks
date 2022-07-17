@@ -4,7 +4,7 @@
   tasks:
     - debug:
         var: test_hostname
-      debug:
+    - debug:
         var: ansible_user
-      debug:
+    - debug:
         var: ansible_ssh_private_key_file
