@@ -1,0 +1,5 @@
+extra_vars:
+  CONJUR_ACCOUNT: '{{ conjur_account }}'
+  CONJUR_APPLIANCE_URL: '{{ conjur_appliance_url }}'
+  CONJUR_AUTHN_LOGIN: '{{ conjur_authn_login }}'
+  CONJUR_AUTHN_API_KEY: '{{ conjur_authn_api_key }}'

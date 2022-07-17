@@ -1,0 +1,23 @@
+fields:
+  - id: conjur_authn_login
+    type: string
+    label: Host Identity
+    help_text: Conjur host username (e.g. host/...)
+  - id: conjur_authn_api_key
+    type: string
+    label: API Key
+    secret: true
+    help_text: The API key that corresponds to the Conjur host username
+  - id: conjur_account
+    type: string
+    label: Conjur Account
+    help_text: The Conjur account name
+  - id: conjur_appliance_url
+    type: string
+    label: Conjur Appliance URL
+    help_text: URL of the running Conjur service
+required:
+  - conjur_authn_login
+  - conjur_authn_api_key
+  - conjur_account
+  - conjur_appliance_url
