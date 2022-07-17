@@ -1,7 +1,7 @@
 ---
 cyberark:
-  pvwa_url: '{{ lookup("env", "CYBERARK_API_URL") }}'
-  auth_type: '{{ lookup("env", "CYBERARK_API_AUTH_TYPE") }}'
-  username: '{{ lookup("env", "CYBERARK_API_USERNAME") }}'
-  password: '{{ lookup("env", "CYBERARK_API_PASSWORD") }}'
+  pvwa_url: '{{ CYBERARK_API_URL }}'
+  auth_type: '{{ CYBERARK_API_AUTH_TYPE }}'
+  username: '{{ CYBERARK_API_USERNAME }}'
+  password: '{{ CYBERARK_API_PASSWORD }}'
   test: test
