@@ -7,24 +7,21 @@
         state: file
         suffix: key
       register: temp_key
-      delegate_to: localhost
       no_log: yes
 
     - name: Write SSH Private Key to TempFile
       copy:
         dest: "{{ temp_key.path }}"
         content: "{{ lookup('cyberark.conjur.conjur_variable', 'SyncVault/LOB_CD/D-Nix-AWS-EC2-Keypairs/Operating System-UnixSSHKeys-' + inventory_hostname + '-ec2-user/password') }}"
-      delegate_to: localhost
       changed_when: false
       no_log: yes
     
     - name: Set SSH Private Key Path to Fact
       set_fact:
         host_privkey: "{{ temp_key.path }}"
-      delegate_to: localhost
 
   vars:
-    ansible_ssh_private_key_file: "{{ hostvars['localhost']['host_privkey'] }}"
+    ansible_ssh_private_key_file: "{{ host_privkey }}"
 
   tasks:
     - debug:
