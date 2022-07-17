@@ -4,4 +4,3 @@ cyberark:
   auth_type: '{{ CYBERARK_API_AUTH_TYPE }}'
   username: '{{ CYBERARK_API_USERNAME }}'
   password: '{{ CYBERARK_API_PASSWORD }}'
-  test: test
