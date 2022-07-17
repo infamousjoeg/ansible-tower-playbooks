@@ -6,6 +6,13 @@
     remote_src: yes
   become: yes
 
+- debug:
+    var: cyberark.username
+- debug:
+    var: cyberark.auth_type
+- debug:
+    var: cyberark.pvwa_url
+
 - name: Login to cybr-cli for PAS
   ansible.builtin.shell: "cybr logon -u {{ cyberark.username }} -a {{ cyberark.auth_type }} -b {{ cyberark.pvwa_url }} -p {{ cyberark.password }} --non-interactive"
 
