@@ -1,7 +1,3 @@
 ---
-- hosts: all
-  vars:
-    ansible_ssh_pass: "{{ lookup('cyberark.conjur.conjur_variable', 'SyncVault/LOB_CD/D-Nix-Root/Operating System-UnixSSH-' + inventory_hostname + '-root/username ') }}"
-  tasks:
-    - debug:
-        var: test_hostname
+- debug:
+    var: test_hostname
