@@ -2,10 +2,14 @@
   tasks:
     - ansible.builtin.shell: ansible-galaxy collection install cyberark.conjur --collections-path /home/runner/.ansible/collections
 
+- hosts: localhost
+  tasks:
+    - ansible.builtin.shell: ansible-galaxy collection list
+
 - hosts: all
   gather_facts: no
-  #vars:
-  #  ansible_ssh_pass: "{{ lookup('cyberark.conjur.conjur_variable', 'SyncVault/LOB_CD/D-Nix-Root/Operating System-UnixSSH-' + inventory_hostname + '-root/username ') }}"
+  vars:
+    ansible_ssh_pass: "{{ lookup('cyberark.conjur.conjur_variable', 'SyncVault/LOB_CD/D-Nix-Root/Operating System-UnixSSH-' + inventory_hostname + '-root/username ') }}"
 
   #roles:
   #  - { role: "roles/os-patching" }
