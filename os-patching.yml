@@ -1,7 +1,13 @@
 - hosts: localhost
+  tasks:
+    - community.general.ansible_galaxy_install:
+        type: collection
+        name: cyberark.conjur
+        dest: /home/runner/.ansible/collections
+
+---
+- hosts: all
   gather_facts: no
-  collections:
-    - cyberark.conjur
   vars:
     ansible_ssh_pass: "{{ lookup('cyberark.conjur.conjur_variable', 'SyncVault/LOB_CD/D-Nix-Root/Operating System-UnixSSH-' + inventory_hostname + '-root/username ') }}"
 
