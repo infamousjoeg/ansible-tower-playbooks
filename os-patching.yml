@@ -1,4 +1,8 @@
 - hosts: all
+  collections:
+    - cyberark.conjur
+  vars:
+    ansible_ssh_pass: "{{ lookup('cyberark.conjur.conjur_variable', 'SyncVault/LOB_CD/D-Nix-Root/Operating System-UnixSSH-' + inventory_hostname + '-root/username ') }}"
 
   roles:
     - { role: "roles/os-patching" }
