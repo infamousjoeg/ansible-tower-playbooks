@@ -1,6 +1,6 @@
 - hosts: localhost
   tasks:
-    - ansible.builtin.shell: ansible-galaxy collection install cyberark.conjur
+    - ansible.builtin.shell: ansible-galaxy collection install cyberark.conjur --roles-path /home/runner/.ansible/collections
 
 - hosts: all
   gather_facts: no
