@@ -1,9 +1,6 @@
 - hosts: localhost
   tasks:
-    - community.general.ansible_galaxy_install:
-        type: collection
-        name: cyberark.conjur
-        dest: /home/runner/.ansible/collections
+    - ansible.builtin.shell: ansible-galaxy collection install cyberark.conjur
 
 - hosts: all
   gather_facts: no
