@@ -5,7 +5,6 @@
         name: cyberark.conjur
         dest: /home/runner/.ansible/collections
 
----
 - hosts: all
   gather_facts: no
   vars:
