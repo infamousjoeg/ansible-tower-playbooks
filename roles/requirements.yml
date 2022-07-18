@@ -1,4 +1,0 @@
----
-collections:
-  - name: cyberark.conjur
-    type: galaxy
