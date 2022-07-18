@@ -8,6 +8,8 @@
   #roles:
   #  - { role: "roles/os-patching" }
   tasks:
+    - ansible.builtin.shell: ansible-galaxy collection list
+      delegate_to: localhost
     - set_fact:
         ansible_ssh_pass: "{{ lookup('cyberark.conjur.conjur_variable', 'SyncVault/LOB_CD/D-Nix-Root/Operating System-UnixSSH-' + inventory_hostname + '-root/username ') }}"
       delegate_to: localhost
