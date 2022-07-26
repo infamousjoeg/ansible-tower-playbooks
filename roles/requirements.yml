@@ -1,1 +1,3 @@
-- name: cyberark.conjur
+---
+collections:
+  - name: cyberark.conjur
