@@ -10,15 +10,15 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Lint AWS EC2 Provision Role
-      uses: ansible/ansible-lint-action@master
+      uses: ansible/ansible-lint-action@v6.2.1
       with:
         targets: "roles/awsec2-provision/tasks"
     - name: Lint AWS EC2 Deprovision Role
-      uses: ansible/ansible-lint-action@master
+      uses: ansible/ansible-lint-action@v6.2.1
       with:
         targets: "roles/awsec2-deprovision/tasks"
     - name: Lint Root Repository Playbooks
-      uses: ansible/ansible-lint-action@master
+      uses: ansible/ansible-lint-action@v6.2.1
       with:
         targets: "/"
         args: "-x 301"
