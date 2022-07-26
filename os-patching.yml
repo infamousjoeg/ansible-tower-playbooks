@@ -9,6 +9,7 @@
   tasks:
     - ansible.builtin.debug:
         msg: "{{ lookup('ansible.builtin.env', 'CONJUR_APPLIANCE_URL') }}"
+      delegate_to: localhost
     - set_fact:
         #ansible_ssh_private_key_file: "{{ lookup('cyberark.conjur.conjur_variable', 'SyncVault/LOB_CD/D-Nix-AWS-EC2-Keypairs/Operating System-UnixSSHKeys-' + inventory_hostname + '-ec2-user/password', as_file=True) }}"
         ansible_ssh_pass: "{{ lookup('cyberark.conjur.conjur_variable', 'SyncVault/LOB_CD/D-Nix-Root/Operating System-UnixSSH-' + inventory_hostname + '-root/password ') }}"
