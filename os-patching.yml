@@ -7,9 +7,27 @@
   #  - { role: "roles/os-patching" }
 
   tasks:
-    - ansible.builtin.debug:
-        msg: "{{ CONJUR_APPLIANCE_URL }}"
+    - ansible.builtin.file:
+        path: "/etc/conjur.identity"
+        state: touch
       delegate_to: localhost
+    - ansible.builtin.copy:
+        dest: "/etc/conjur.identity"
+        content: |
+          appliance_url: {{ CONJUR_APPLIANCE_URL }}
+          account: {{ CONJUR_ACCOUNT }}
+          cert_file: 
+      delegate_to: localhost
+    - ansible.builtin.file:
+        path: "/etc/conjur.conf"
+        state: touch
+      delegate_to: localhost
+    - ansible.builtin.copy:
+        dest: "/etc/conjur.conf"
+        content: |
+          machine {{ CONJUR_APPLIANCE_URL }}/authn
+              login {{ CONJUR_AUTHN_LOGIN }}
+              password {{ CONJUR_AUTHN_API_KEY }}
     - set_fact:
         #ansible_ssh_private_key_file: "{{ lookup('cyberark.conjur.conjur_variable', 'SyncVault/LOB_CD/D-Nix-AWS-EC2-Keypairs/Operating System-UnixSSHKeys-' + inventory_hostname + '-ec2-user/password', as_file=True) }}"
         ansible_ssh_pass: "{{ lookup('cyberark.conjur.conjur_variable', 'SyncVault/LOB_CD/D-Nix-Root/Operating System-UnixSSH-' + inventory_hostname + '-root/password ') }}"
