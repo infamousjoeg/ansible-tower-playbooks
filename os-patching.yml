@@ -1,5 +1,7 @@
 - hosts: all
   gather_facts: no
+  collections:
+    - cyberark.conjur
   
   #roles:
   #  - { role: "roles/os-patching" }
