@@ -18,8 +18,3 @@
   no_log: yes
 
 - ansible.builtin.shell: hostname
-  register: hostname_var
-
-- ansible.builtin.debug:
-    var: hostname_var
-    verbosity: 2
