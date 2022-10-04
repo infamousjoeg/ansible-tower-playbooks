@@ -20,6 +20,6 @@
 - ansible.builtin.shell: hostname
   register: hostname_var
 
-- ansible.debug:
+- ansible.builtin.debug:
     var: hostname_var
     verbosity: 2
