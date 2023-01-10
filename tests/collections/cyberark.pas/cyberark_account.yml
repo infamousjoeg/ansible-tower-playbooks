@@ -35,7 +35,7 @@
       register: cyberarkaction
 
     - name: Debug message
-      debug:
+      ansible.builtin.debug:
         var: cyberarkaction
 
     - name: Offboard Account
@@ -49,7 +49,7 @@
       register: cyberarkaction
 
     - name: Debug message
-      debug:
+      ansible.builtin.debug:
         var: cyberarkaction
 
     - name: Logoff from CyberArk Vault
