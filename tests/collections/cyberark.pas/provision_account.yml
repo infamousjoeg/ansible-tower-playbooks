@@ -1,0 +1,58 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: Logon to CyberArk PAM REST API using CyberArk authn
+      cyberark.pas.cyberark_authentication:
+        api_base_url: "{{ cyberark_pvwa_url }}"
+        username: "{{ cyberark_username }}"
+        password: "{{ cyberark_password }}"
+        use_cyberark_authentication: yes
+      when: cyberark_auth_type == 'cyberark' or cyberark_auth_type not defined
+ 
+    - name: Logon to CyberArk PAM REST API using LDAP authn
+      cyberark.pas.cyberark_authentication:
+        api_base_url: "{{ cyberark_pvwa_url }}"
+        username: "{{ cyberark_username }}"
+        password: "{{ cyberark_password }}"
+        use_ldap_authentication: yes
+      when: cyberark_auth_type == 'ldap'
+
+    - name: Onboard Account
+      cyberark.pas.cyberark_account:
+        identified_by: "address,username"
+        safe: "Test"
+        address: "cyberark.local"
+        username: "cyberark-administrator"
+        platform_id: WinDomain
+        secret: "CyberarkFirst"
+        platform_account_properties:
+            LogonDomain: "RedHatAnsible"
+        secret_management:
+            automatic_management_enabled: true
+        state: present
+        cyberark_session: "{{ cyberark_session }}"
+      register: cyberarkaction
+
+    - name: Debug message
+      debug:
+        var: cyberarkaction
+
+    - name: Offboard Account
+      cyberark.pas.cyberark_account:
+        identified_by: "address,username"
+        safe: "Test"
+        address: "cyberark.local"
+        username: "cyberark-administrator"
+        state: absent
+        cyberark_session: "{{ cyberark_session }}"
+      register: cyberarkaction
+
+    - name: Debug message
+      debug:
+        var: cyberarkaction
+
+    - name: Logoff from CyberArk Vault
+      cyberark.pas.cyberark_authentication:
+        state: absent
+        cyberark_session: "{{ cyberark_session }}"
