@@ -1,4 +1,44 @@
 hosts: localhost
 
 tasks:
-  name: TBD
+  - name: Logon to CyberArk PAM REST API using CyberArk authn
+    cyberark.pas.cyberark_authentication:
+      api_base_url: "{{ cyberark_pvwa_url }}"
+      username: "{{ cyberark_username }}"
+      password: "{{ cyberark_password }}"
+      use_cyberark_authentication: yes
+    when: cyberark_auth_type == 'cyberark' or cyberark_auth_type not defined
+ 
+  - name: Logon to CyberArk PAM REST API using LDAP authn
+    cyberark.pas.cyberark_authentication:
+      api_base_url: "{{ cyberark_pvwa_url }}"
+      username: "{{ cyberark_username }}"
+      password: "{{ cyberark_password }}"
+      use_ldap_authentication: yes
+    when: cyberark_auth_type == 'ldap'
+
+  - name: Create Test Safe
+    ansible.builtin.uri:
+      url: "{{ cyberark_pvwa_url }}/PasswordVault/api/safes
+      method: POST
+      headers:
+        Content-Type: application/json
+        Authorization: "{{ cyberark_session }}"
+      body:
+        SafeName: "Test-Ansible"
+        Description: "A test safe for Ansible use cases"
+        OLACEnabled: false
+        ManagingCPM: "PasswordManager"
+        NumberOfDaysRetention: 0
+        AutoPurgeEnabled: false
+    register: cyberarkaction
+
+  - name: Debug msg
+    ansible.builtin.debug:
+      msg: "{{ cyberarkaction }}"
+
+  - name: Logoff CyberArk PAM REST API
+    cyberark.pas.cyberark_authentication:
+      cyberark_session: "{{ cyberark_session }}"
+      state: absent
+    ignore_errors: yes
