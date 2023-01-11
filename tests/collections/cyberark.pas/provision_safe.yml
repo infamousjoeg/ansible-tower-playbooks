@@ -34,12 +34,12 @@
           AutoPurgeEnabled: "{{ autopurge }}"
       register: cyberarkaction
 
-  - name: Debug msg
-    ansible.builtin.debug:
-      msg: "{{ cyberarkaction }}"
+    - name: Debug msg
+      ansible.builtin.debug:
+        msg: "{{ cyberarkaction }}"
 
-  - name: Logoff CyberArk PAM REST API
-    cyberark.pas.cyberark_authentication:
-      cyberark_session: "{{ cyberark_session }}"
-      state: absent
-    ignore_errors: yes
+    - name: Logoff CyberArk PAM REST API
+      cyberark.pas.cyberark_authentication:
+        cyberark_session: "{{ cyberark_session }}"
+        state: absent
+      ignore_errors: yes
