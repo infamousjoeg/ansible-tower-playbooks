@@ -8,7 +8,7 @@
         username: "{{ CYBERARK_API_USERNAME }}"
         password: "{{ CYBERARK_API_PASSWORD }}"
         use_cyberark_authentication: yes
-      when: CYBERARK_API_AUTH_TYPE == 'cyberark' or CYBERARK_API_AUTH_TYPE not defined
+      when: CYBERARK_API_AUTH_TYPE == 'cyberark'
 
     - name: Logon to CyberArk PAM REST API using LDAP authn
       cyberark.pas.cyberark_authentication:
@@ -17,16 +17,19 @@
         password: "{{ CYBERARK_API_PASSWORD }}"
         use_ldap_authentication: yes
       when: CYBERARK_API_AUTH_TYPE == 'ldap'
+    
+    - name: Error message for Windows or Radius authn
+      ansible.builtin.debug:
+        msg: "Windows or Radius authentication is not supported."
+      when: CYBERARK_API_AUTH_TYPE == 'windows' or CYBERARK_API_AUTH_TYPE == 'radius'
 
-    - name: Create Test Safe
+    - name: Delete Test Safe
       ansible.builtin.uri:
-        url: "{{ CYBERARK_API_URL }}/PasswordVault/api/safes"
+        url: "{{ CYBERARK_API_URL }}/PasswordVault/api/safes/{{ safe }}"
         method: DELETE
         headers:
           Content-Type: application/json
-          Authorization: "{{ cyberark_session }}"
-        body:
-          SafeName: "{{ safe }}"
+          Authorization: "{{ cyberark_session.token }}"
       register: cyberarkaction
 
     - name: Debug msg
