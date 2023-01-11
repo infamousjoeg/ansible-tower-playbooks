@@ -19,7 +19,7 @@ tasks:
 
   - name: Create Test Safe
     ansible.builtin.uri:
-      url: "{{ CYBERARK_API_URL }}/PasswordVault/api/safes
+      url: "{{ CYBERARK_API_URL }}/PasswordVault/api/safes"
       method: POST
       headers:
         Content-Type: application/json
