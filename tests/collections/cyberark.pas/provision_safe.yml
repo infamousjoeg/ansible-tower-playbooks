@@ -38,7 +38,8 @@
           ManagingCPM: "{{ managingCPM }}"
           NumberOfDaysRetention: "{{ daysretention }}"
           AutoPurgeEnabled: "{{ autopurge }}"
-        status_code: 201
+        status_code:
+          - 201
       register: cyberarkaction
 
     - name: Debug msg
