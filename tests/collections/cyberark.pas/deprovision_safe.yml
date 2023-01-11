@@ -30,6 +30,8 @@
         headers:
           Content-Type: application/json
           Authorization: "{{ cyberark_session.token }}"
+        status_code:
+          - 204
       register: cyberarkaction
 
     - name: Debug msg
