@@ -3,29 +3,29 @@ hosts: localhost
 tasks:
   - name: Logon to CyberArk PAM REST API using CyberArk authn
     cyberark.pas.cyberark_authentication:
-      api_base_url: "{{ cyberark_pvwa_url }}"
-      username: "{{ cyberark_username }}"
-      password: "{{ cyberark_password }}"
+      api_base_url: "{{ CYBERARK_API_URL }}"
+      username: "{{ CYBERARK_API_USERNAME }}"
+      password: "{{ CYBERARK_API_PASSWORD }}"
       use_cyberark_authentication: yes
-    when: cyberark_auth_type == 'cyberark' or cyberark_auth_type not defined
+    when: CYBERARK_API_AUTH_TYPE == 'cyberark' or CYBERARK_API_AUTH_TYPE not defined
  
   - name: Logon to CyberArk PAM REST API using LDAP authn
     cyberark.pas.cyberark_authentication:
-      api_base_url: "{{ cyberark_pvwa_url }}"
-      username: "{{ cyberark_username }}"
-      password: "{{ cyberark_password }}"
+      api_base_url: "{{ CYBERARK_API_URL }}"
+      username: "{{ CYBERARK_API_USERNAME }}"
+      password: "{{ CYBERARK_API_PASSWORD }}"
       use_ldap_authentication: yes
-    when: cyberark_auth_type == 'ldap'
+    when: CYBERARK_API_AUTH_TYPE == 'ldap'
 
   - name: Create Test Safe
     ansible.builtin.uri:
-      url: "{{ cyberark_pvwa_url }}/PasswordVault/api/safes
+      url: "{{ CYBERARK_API_URL }}/PasswordVault/api/safes
       method: DELETE
       headers:
         Content-Type: application/json
         Authorization: "{{ cyberark_session }}"
       body:
-        SafeName: "Test-Ansible"
+        SafeName: "{{ safe }}"
     register: cyberarkaction
 
   - name: Debug msg
