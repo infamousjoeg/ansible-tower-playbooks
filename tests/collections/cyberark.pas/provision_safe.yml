@@ -25,12 +25,12 @@ tasks:
         Content-Type: application/json
         Authorization: "{{ cyberark_session }}"
       body:
-        SafeName: "Test-Ansible"
-        Description: "A test safe for Ansible use cases"
-        OLACEnabled: false
-        ManagingCPM: "PasswordManager"
-        NumberOfDaysRetention: 0
-        AutoPurgeEnabled: false
+        SafeName: "{{ safe }}"
+        Description: "{{ description }}"
+        OLACEnabled: {{ olac }}
+        ManagingCPM: "{{ managingCPM }}"
+        NumberOfDaysRetention: {{ daysretention }}
+        AutoPurgeEnabled: {{ autopurge }}
     register: cyberarkaction
 
   - name: Debug msg
