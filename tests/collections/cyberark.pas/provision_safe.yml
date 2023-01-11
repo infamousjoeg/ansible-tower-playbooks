@@ -30,6 +30,7 @@
         headers:
           Content-Type: application/json
           Authorization: "{{ cyberark_session.token }}"
+        body_format: json
         body:
           SafeName: "{{ safe }}"
           Description: "{{ description }}"
