@@ -9,15 +9,13 @@
     - name: Onboard Account
       cyberark.pas.cyberark_account:
         identified_by: "address,username"
-        safe: "Test-Ansible"
-        address: "cyberark.local"
-        username: "cyberark-administrator"
-        platform_id: WinDomain
-        secret: "CyberarkFirst"
-        platform_account_properties:
-            LogonDomain: "RedHatAnsible"
+        safe: "{{ safe }}"
+        address: "{{ address }}"
+        username: "{{ username }}"
+        platform_id: "{{ platformID }}"
+        secret: "{{ password }}"
         secret_management:
-            automatic_management_enabled: true
+            automatic_management_enabled: "{{ automaticmgmt }}"
         state: present
         cyberark_session: "{{ cyberark_session }}"
       register: cyberarkaction
@@ -29,9 +27,9 @@
     - name: Offboard Account
       cyberark.pas.cyberark_account:
         identified_by: "address,username"
-        safe: "Test"
-        address: "cyberark.local"
-        username: "cyberark-administrator"
+        safe: "{{ safe }}"
+        address: "{{ address }}"
+        username: "{{ username }}"
         state: absent
         cyberark_session: "{{ cyberark_session }}"
       register: cyberarkaction
