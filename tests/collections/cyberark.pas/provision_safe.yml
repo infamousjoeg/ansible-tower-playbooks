@@ -2,26 +2,9 @@
 - hosts: localhost
 
   tasks:
-    - name: Logon to CyberArk PAM REST API using CyberArk authn
-      cyberark.pas.cyberark_authentication:
-        api_base_url: "{{ CYBERARK_API_URL }}"
-        username: "{{ CYBERARK_API_USERNAME }}"
-        password: "{{ CYBERARK_API_PASSWORD }}"
-        use_cyberark_authentication: yes
-      when: CYBERARK_API_AUTH_TYPE == 'cyberark'
-
-    - name: Logon to CyberArk PAM REST API using LDAP authn
-      cyberark.pas.cyberark_authentication:
-        api_base_url: "{{ CYBERARK_API_URL }}"
-        username: "{{ CYBERARK_API_USERNAME }}"
-        password: "{{ CYBERARK_API_PASSWORD }}"
-        use_ldap_authentication: yes
-      when: CYBERARK_API_AUTH_TYPE == 'ldap'
-    
-    - name: Error message for Windows or Radius authn
-      ansible.builtin.debug:
-        msg: "Windows or Radius authentication is not supported."
-      when: CYBERARK_API_AUTH_TYPE == 'windows' or CYBERARK_API_AUTH_TYPE == 'radius'
+    - name: Logon to CyberArk PAM REST API
+      ansible.builtin.include_tasks:
+        file: cyberark_authentication.yml
 
     - name: Create Test Safe
       ansible.builtin.uri:
