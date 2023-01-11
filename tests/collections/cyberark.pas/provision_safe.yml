@@ -27,10 +27,10 @@ tasks:
       body:
         SafeName: "{{ safe }}"
         Description: "{{ description }}"
-        OLACEnabled: {{ olac }}
+        OLACEnabled: "{{ olac }}"
         ManagingCPM: "{{ managingCPM }}"
-        NumberOfDaysRetention: {{ daysretention }}
-        AutoPurgeEnabled: {{ autopurge }}
+        NumberOfDaysRetention: "{{ daysretention }}"
+        AutoPurgeEnabled: "{{ autopurge }}"
     register: cyberarkaction
 
   - name: Debug msg
