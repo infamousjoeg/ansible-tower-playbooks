@@ -1,37 +1,38 @@
-hosts: localhost
+---
+- hosts: localhost
 
-tasks:
-  - name: Logon to CyberArk PAM REST API using CyberArk authn
-    cyberark.pas.cyberark_authentication:
-      api_base_url: "{{ CYBERARK_API_URL }}"
-      username: "{{ CYBERARK_API_USERNAME }}"
-      password: "{{ CYBERARK_API_PASSWORD }}"
-      use_cyberark_authentication: yes
-    when: CYBERARK_API_AUTH_TYPE == 'cyberark' or CYBERARK_API_AUTH_TYPE not defined
- 
-  - name: Logon to CyberArk PAM REST API using LDAP authn
-    cyberark.pas.cyberark_authentication:
-      api_base_url: "{{ CYBERARK_API_URL }}"
-      username: "{{ CYBERARK_API_USERNAME }}"
-      password: "{{ CYBERARK_API_PASSWORD }}"
-      use_ldap_authentication: yes
-    when: CYBERARK_API_AUTH_TYPE == 'ldap'
+  tasks:
+    - name: Logon to CyberArk PAM REST API using CyberArk authn
+      cyberark.pas.cyberark_authentication:
+        api_base_url: "{{ CYBERARK_API_URL }}"
+        username: "{{ CYBERARK_API_USERNAME }}"
+        password: "{{ CYBERARK_API_PASSWORD }}"
+        use_cyberark_authentication: yes
+      when: CYBERARK_API_AUTH_TYPE == 'cyberark' or CYBERARK_API_AUTH_TYPE not defined
 
-  - name: Create Test Safe
-    ansible.builtin.uri:
-      url: "{{ CYBERARK_API_URL }}/PasswordVault/api/safes"
-      method: POST
-      headers:
-        Content-Type: application/json
-        Authorization: "{{ cyberark_session }}"
-      body:
-        SafeName: "{{ safe }}"
-        Description: "{{ description }}"
-        OLACEnabled: "{{ olac }}"
-        ManagingCPM: "{{ managingCPM }}"
-        NumberOfDaysRetention: "{{ daysretention }}"
-        AutoPurgeEnabled: "{{ autopurge }}"
-    register: cyberarkaction
+    - name: Logon to CyberArk PAM REST API using LDAP authn
+      cyberark.pas.cyberark_authentication:
+        api_base_url: "{{ CYBERARK_API_URL }}"
+        username: "{{ CYBERARK_API_USERNAME }}"
+        password: "{{ CYBERARK_API_PASSWORD }}"
+        use_ldap_authentication: yes
+      when: CYBERARK_API_AUTH_TYPE == 'ldap'
+
+    - name: Create Test Safe
+      ansible.builtin.uri:
+        url: "{{ CYBERARK_API_URL }}/PasswordVault/api/safes"
+        method: POST
+        headers:
+          Content-Type: application/json
+          Authorization: "{{ cyberark_session }}"
+        body:
+          SafeName: "{{ safe }}"
+          Description: "{{ description }}"
+          OLACEnabled: "{{ olac }}"
+          ManagingCPM: "{{ managingCPM }}"
+          NumberOfDaysRetention: "{{ daysretention }}"
+          AutoPurgeEnabled: "{{ autopurge }}"
+      register: cyberarkaction
 
   - name: Debug msg
     ansible.builtin.debug:
