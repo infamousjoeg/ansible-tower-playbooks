@@ -29,7 +29,7 @@
         method: POST
         headers:
           Content-Type: application/json
-          Authorization: "{{ cyberark_session }}"
+          Authorization: "{{ cyberark_session.token }}"
         body:
           SafeName: "{{ safe }}"
           Description: "{{ description }}"
